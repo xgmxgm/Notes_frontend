@@ -1,0 +1,23 @@
+.authorize-page {
+	@apply flex h-screen;
+
+	&__actions {
+		@apply w-7/12 flex justify-center items-center bg-gray-200;
+	}
+
+	&__landing {
+		@apply pl-10 pr-10 flex flex-col justify-evenly bg-gray-100 overflow-y-hidden overflow-x-hidden;
+	}
+
+	&__heading {
+		@apply flex items-center;
+	}
+
+	&__title {
+		@apply text-3xl font-bold;
+	}
+
+	&__img {
+		@apply rounded-md shadow-2xl cursor-grab active:cursor-grabbing;
+	}
+}
