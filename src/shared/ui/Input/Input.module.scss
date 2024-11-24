@@ -1,0 +1,11 @@
+.input {
+	@apply my-2;
+
+	&__title {
+		@apply text-lg font-medium;
+	}
+
+	&__field {
+		@apply border-gray-500 border-2 text-lg px-4 mt-2 rounded-md outline-customblue;
+	}
+}
