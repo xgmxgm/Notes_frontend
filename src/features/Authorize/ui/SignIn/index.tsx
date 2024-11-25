@@ -10,11 +10,13 @@ export const SignIn = () => {
 				<p className={styles['sign-in__sub-title']}>Sign in your account</p>
 			</div>
 			<div>
-				<Input title='Email' type='email' required />
-				<Input title='Password' type='password' required />
-			</div>
-			<div>
-				<Button>Sign In</Button>
+				<div>
+					<Input title='Email' type='email' required />
+					<Input title='Password' type='password' required />
+				</div>
+				<div className='mt-10'>
+					<Button>Sign In</Button>
+				</div>
 			</div>
 		</form>
 	)
