@@ -2,10 +2,22 @@
 	@apply my-2;
 
 	&__title {
-		@apply text-lg font-medium;
+		@apply text-lg mb-2 font-medium;
+	}
+
+	&__with-icon {
+		@apply flex items-center;
 	}
 
 	&__field {
-		@apply w-full border-gray-700 border-2 text-base px-4 py-1 mt-2 rounded-md outline-customblue;
+		@apply w-full border-gray-700 border-y-2 border-l-2 text-base px-4 py-1 rounded-bl-md rounded-tl-md outline-customblue;
+
+		&::placeholder {
+			@apply text-gray-700;
+		}
+	}
+
+	&__eye-button {
+		@apply border-gray-700 border-y-2 border-r-2 p-[9.5px] bg-white rounded-br-md rounded-tr-md;
 	}
 }

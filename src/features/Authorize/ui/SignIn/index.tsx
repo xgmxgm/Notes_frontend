@@ -11,12 +11,21 @@ export const SignIn = () => {
 			</div>
 			<div>
 				<div>
-					<Input title='Email' type='email' required />
-					<Input title='Password' type='password' required />
+					<Input placeholder='Email' title='Email' type='email' required />
+					<Input
+						placeholder='Password'
+						title='Password'
+						type='password'
+						required
+					/>
 				</div>
 				<div className='mt-10'>
 					<Button>Sign In</Button>
 				</div>
+			</div>
+			<div className={styles['sign-in__sign-up-link']}>
+				<p className={styles['sign-in__text']}>Don’t have an account?</p>
+				<p className={styles['sign-in__link']}>Sign Up</p>
 			</div>
 		</form>
 	)
