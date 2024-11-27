@@ -1,13 +1,21 @@
 import notesImgSrc from '@/../public/images/notes_app.webp'
+import { SignUp } from '@/features/Authorize/ui/SignUp'
 import styles from './AuhorizePage.module.scss'
 import { SignIn } from '@/features/Authorize'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export const AuthorizePage = () => {
+	const [isSignIn, setIsSignIn] = useState<boolean>(true)
+
 	return (
 		<div className={styles['authorize-page']}>
 			<div className={styles['authorize-page__actions']}>
-				<SignIn />
+				{isSignIn ? (
+					<SignIn setIsSignIn={setIsSignIn} />
+				) : (
+					<SignUp setIsSignIn={setIsSignIn} />
+				)}
 			</div>
 			<div className={styles['authorize-page__landing']}>
 				<div className={styles['authorize-page__heading']}>

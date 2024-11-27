@@ -8,7 +8,12 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
 	placeholder?: string
 }
 
-export const Input = ({ title, type = 'text', placeholder }: IProps) => {
+export const Input = ({
+	title,
+	type = 'text',
+	placeholder,
+	...props
+}: IProps) => {
 	const [fieldType, setFieldType] = useState<HTMLInputTypeAttribute>(type)
 
 	return (
@@ -19,6 +24,7 @@ export const Input = ({ title, type = 'text', placeholder }: IProps) => {
 					className={styles['input__field']}
 					placeholder={placeholder}
 					type={fieldType}
+					{...props}
 				/>
 				{type === 'password' ? (
 					<button

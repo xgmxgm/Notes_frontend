@@ -1,8 +1,13 @@
 import { Button } from '@/shared/ui/Button'
 import { Input } from '@/shared/ui/Input'
 import styles from './SignIn.module.scss'
+import { FC } from 'react'
 
-export const SignIn = () => {
+interface IProps {
+	setIsSignIn: (isSignIn: boolean) => void
+}
+
+export const SignIn: FC<IProps> = ({ setIsSignIn }) => {
 	return (
 		<form className={styles['sign-in']}>
 			<div>
@@ -20,12 +25,17 @@ export const SignIn = () => {
 					/>
 				</div>
 				<div className='mt-10'>
-					<Button>Sign In</Button>
+					<Button type='submit'>Sign In</Button>
 				</div>
 			</div>
 			<div className={styles['sign-in__sign-up-link']}>
 				<p className={styles['sign-in__text']}>Don’t have an account?</p>
-				<p className={styles['sign-in__link']}>Sign Up</p>
+				<p
+					className={styles['sign-in__link']}
+					onClick={() => setIsSignIn(false)}
+				>
+					Sign Up
+				</p>
 			</div>
 		</form>
 	)
