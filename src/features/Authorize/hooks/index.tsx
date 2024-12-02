@@ -1,18 +1,18 @@
 import { useNavigate } from 'react-router-dom'
 import { useIsAuth } from '@/app/store/storeIsAuth'
 import { useUserStore } from '@/app/store/storeUser'
-import { useNotification } from '@/features/Notification'
 import {
 	getAuth,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 } from 'firebase/auth'
+import { useNotificationContext } from '@/features/Notification/context'
 
 export const useAuthActions = () => {
 	const navigate = useNavigate()
 	const { setAuth } = useIsAuth()
 	const { setUser, removeUser } = useUserStore()
-	const { errorNotification, successNotification } = useNotification()
+	const { setError, setSuccess } = useNotificationContext()
 
 	const loginWithEmailAndPassword = (email: string, password: string) => {
 		const auth = getAuth()
@@ -24,9 +24,11 @@ export const useAuthActions = () => {
 					id: user.uid,
 				})
 				setAuth(true)
+				setSuccess('You have successfully logged in')
 				navigate('/')
 			})
 			.catch(err => {
+				setError('Email or Password entered incorrectly')
 				console.log('Context: ', err)
 			})
 	}
@@ -44,9 +46,13 @@ export const useAuthActions = () => {
 					id: user.uid,
 				})
 				setAuth(true)
+				setSuccess('You have successfully logged in')
 				navigate('/')
 			})
-			.catch(console.error)
+			.catch(err => {
+				setError('Service is not working. Try again later')
+				console.error(err)
+			})
 	}
 
 	const logout = () => {

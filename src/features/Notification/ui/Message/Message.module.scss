@@ -1,0 +1,11 @@
+.message {
+	@apply fixed z-50 top-3 left-2/4 border-2 border-black p-2 rounded-md;
+
+	&.error {
+		@apply border-red-500;
+	}
+
+	&.success {
+		@apply border-green-500;
+	}
+}
