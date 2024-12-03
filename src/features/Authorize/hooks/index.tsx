@@ -1,23 +1,28 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useIsAuth } from '@/app/store/storeIsAuth'
 import { useUserStore } from '@/app/store/storeUser'
+import { useNotificationContext } from '@/features/Notification/context'
 import {
 	getAuth,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
+	signOut,
+	sendPasswordResetEmail,
 } from 'firebase/auth'
-import { useNotificationContext } from '@/features/Notification/context'
 
 export const useAuthActions = () => {
+	const auth = getAuth()
 	const navigate = useNavigate()
 	const { setAuth } = useIsAuth()
 	const { setUser, removeUser } = useUserStore()
 	const { setError, setSuccess } = useNotificationContext()
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	const loginWithEmailAndPassword = (email: string, password: string) => {
-		const auth = getAuth()
+	const loginWithEmailAndPassword = async (email: string, password: string) => {
+		setIsLoading(true)
 
-		signInWithEmailAndPassword(auth, email, password)
+		await signInWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
 				setUser({
 					email: user.email,
@@ -27,38 +32,69 @@ export const useAuthActions = () => {
 				setSuccess('You have successfully logged in')
 				navigate('/')
 			})
-			.catch(err => {
+			.catch(() => {
 				setError('Email or Password entered incorrectly')
-				console.log('Context: ', err)
+			})
+			.finally(() => {
+				setIsLoading(false)
 			})
 	}
 
-	const registerUserWithEmailAndPassword = (
+	const registerUserWithEmailAndPassword = async (
 		email: string,
-		password: string
+		password: string,
+		repeatPassword: string
 	) => {
-		const auth = getAuth()
+		if (password === repeatPassword) {
+			setIsLoading(true)
 
-		createUserWithEmailAndPassword(auth, email, password)
-			.then(({ user }) => {
-				setUser({
-					email: user.email,
-					id: user.uid,
+			await createUserWithEmailAndPassword(auth, email, password)
+				.then(({ user }) => {
+					setUser({
+						email: user.email,
+						id: user.uid,
+					})
+					setAuth(true)
+					setSuccess('You have successfully logged in')
+					navigate('/')
 				})
-				setAuth(true)
-				setSuccess('You have successfully logged in')
-				navigate('/')
+				.catch(() => {
+					setError('This email is already busy')
+				})
+				.finally(() => {
+					setIsLoading(false)
+				})
+		} else {
+			setError("Passwords don't match")
+		}
+	}
+
+	const sendPasswordReset = async (email: string) => {
+		setIsLoading(true)
+
+		await sendPasswordResetEmail(auth, email)
+			.then(() => {
+				navigate('/authorize')
 			})
-			.catch(err => {
+			.catch(() => {
 				setError('Service is not working. Try again later')
-				console.error(err)
+			})
+			.finally(() => {
+				setIsLoading(false)
 			})
 	}
 
-	const logout = () => {
+	const logout = async () => {
 		removeUser()
+		signOut(auth)
 		setAuth(false)
 	}
 
-	return { loginWithEmailAndPassword, registerUserWithEmailAndPassword, logout }
+	return {
+		loginWithEmailAndPassword,
+		registerUserWithEmailAndPassword,
+		logout,
+		sendPasswordReset,
+		isLoading,
+	}
 }

@@ -1,8 +1,8 @@
+import { Input } from '@/shared/ui/Input'
+import styles from './SignUp.module.scss'
+import { Button } from '@/shared/ui/Button'
 import { useAuthActions } from '../../hooks'
 import { FC, FormEvent, useState } from 'react'
-import { Button } from '@/shared/ui/Button'
-import styles from './SignUp.module.scss'
-import { Input } from '@/shared/ui/Input'
 
 interface IProps {
 	setIsSignIn: (isSignIn: boolean) => void
@@ -11,17 +11,13 @@ interface IProps {
 export const SignUp: FC<IProps> = ({ setIsSignIn }) => {
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
-	const { registerUserWithEmailAndPassword } = useAuthActions()
 	const [repeatPassword, setRepeatPassword] = useState<string>('')
+	const { registerUserWithEmailAndPassword, isLoading } = useAuthActions()
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
-		if (password === repeatPassword) {
-			registerUserWithEmailAndPassword(email, password)
-		} else {
-			return
-		}
+		registerUserWithEmailAndPassword(email, password, repeatPassword)
 	}
 
 	return (
@@ -58,7 +54,9 @@ export const SignUp: FC<IProps> = ({ setIsSignIn }) => {
 					/>
 				</div>
 				<div className='mt-10'>
-					<Button type='submit'>Sign Up</Button>
+					<Button type='submit' isLoading={isLoading}>
+						Sign Up
+					</Button>
 				</div>
 			</div>
 			<div className={styles['sign-up__sign-up-link']}>

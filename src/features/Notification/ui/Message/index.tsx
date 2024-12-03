@@ -2,7 +2,6 @@ import { type PropsWithChildren, type FC, useEffect } from 'react'
 import styles from './Message.module.scss'
 import { motion } from 'framer-motion'
 import classNames from 'classnames'
-import { createPortal } from 'react-dom'
 
 interface IProps {
 	success?: boolean
@@ -26,7 +25,7 @@ export const Message: FC<PropsWithChildren<IProps>> = ({
 		}
 	}, [])
 
-	return createPortal(
+	return (
 		<motion.div
 			initial={{ opacity: 0, y: -200 }}
 			animate={{ opacity: 1, y: 0 }}
@@ -38,6 +37,5 @@ export const Message: FC<PropsWithChildren<IProps>> = ({
 		>
 			{children}
 		</motion.div>
-		document.getElementById('overlay') as HTMLElement
 	)
 }
