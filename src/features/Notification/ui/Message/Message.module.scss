@@ -1,5 +1,5 @@
 .message {
-	@apply fixed z-50 top-3 left-2/4 border-2 border-black p-2 rounded-md;
+	@apply fixed z-50 top-3 left-2/4 border-2 border-black p-2 rounded-md flex items-center justify-center gap-3;
 
 	&.error {
 		@apply border-red-500;

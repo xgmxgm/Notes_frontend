@@ -2,6 +2,8 @@ import { type PropsWithChildren, type FC, useEffect } from 'react'
 import styles from './Message.module.scss'
 import { motion } from 'framer-motion'
 import classNames from 'classnames'
+import { Check } from '@/shared/ui/Icons/Check'
+import { Error } from '@/shared/ui/Icons/Error'
 
 interface IProps {
 	success?: boolean
@@ -18,7 +20,7 @@ export const Message: FC<PropsWithChildren<IProps>> = ({
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			messageVisibleHandler(null)
-		}, 4000)
+		}, 10000)
 
 		return () => {
 			clearTimeout(timer)
@@ -35,6 +37,7 @@ export const Message: FC<PropsWithChildren<IProps>> = ({
 				styles.message
 			)}
 		>
+			{success ? <Check /> : <Error />}
 			{children}
 		</motion.div>
 	)

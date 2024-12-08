@@ -1,0 +1,7 @@
+.logo {
+	@apply flex items-center gap-2;
+
+	&__text {
+		@apply text-3xl;
+	}
+}

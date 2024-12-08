@@ -1,0 +1,7 @@
+.section {
+	@apply w-full rounded-lg flex gap-2 items-center my-1 p-2 hover:bg-gray-300 transition-all;
+
+	&__text {
+		@apply text-lg;
+	}
+}

@@ -1,0 +1,13 @@
+.side-bar {
+	@apply w-80 h-screen p-4 border-r-2 border-gray-400 flex flex-col items-center gap-4;
+
+	&__logo {
+		@apply w-full flex justify-start py-2;
+	}
+	&__notes {
+		@apply w-full flex flex-col justify-start border-b-2 border-gray-400;
+	}
+	&__tags {
+		@apply w-full;
+	}
+}

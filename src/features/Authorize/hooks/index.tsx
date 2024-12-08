@@ -49,17 +49,12 @@ export const useAuthActions = () => {
 			setIsLoading(true)
 
 			await createUserWithEmailAndPassword(auth, email, password)
-				.then(({ user }) => {
-					setUser({
-						email: user.email,
-						id: user.uid,
-					})
-					setAuth(true)
-					setSuccess('You have successfully logged in')
-					navigate('/')
+				.then(() => {
+					loginWithEmailAndPassword(email, password)
 				})
 				.catch(() => {
 					setError('This email is already busy')
+					return
 				})
 				.finally(() => {
 					setIsLoading(false)
@@ -74,7 +69,7 @@ export const useAuthActions = () => {
 
 		await sendPasswordResetEmail(auth, email)
 			.then(() => {
-				navigate('/authorize')
+				setSuccess('Message sent to email')
 			})
 			.catch(() => {
 				setError('Service is not working. Try again later')
