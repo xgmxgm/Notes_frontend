@@ -1,3 +1,7 @@
 .layout {
 	@apply flex;
+
+	&__content {
+		@apply w-full;
+	}
 }

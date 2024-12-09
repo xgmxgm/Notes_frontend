@@ -1,0 +1,11 @@
+.search {
+	@apply flex items-center justify-center;
+
+	&__search-icon {
+		@apply border-y-[1px] border-l-[1px] border-y-gray-400 border-l-gray-400 p-[10px] rounded-tl-lg rounded-bl-lg cursor-text;
+	}
+
+	&__input {
+		@apply w-64 border-y-[1px] border-r-[1px] border-y-gray-400 border-r-gray-400 p-2 outline-customblue rounded-tr-lg rounded-br-lg;
+	}
+}

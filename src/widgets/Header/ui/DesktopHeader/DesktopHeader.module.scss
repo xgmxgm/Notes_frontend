@@ -1,0 +1,11 @@
+.header {
+	@apply border-b-2 border-gray-400 p-6 flex justify-between items-center;
+
+	&__title {
+		@apply font-bold text-3xl;
+	}
+
+	&__settings {
+		@apply flex justify-center items-center gap-10;
+	}
+}
