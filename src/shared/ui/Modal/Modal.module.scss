@@ -1,0 +1,15 @@
+.modal {
+	@apply absolute top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center cursor-pointer;
+
+	&__wrapper {
+		@apply w-96 h-64 bg-white flex flex-col items-center justify-between animate-opacity-slow rounded-md p-3 cursor-default;
+	}
+
+	&__title {
+		@apply text-2xl h-1/6 w-full;
+	}
+
+	&__content {
+		@apply w-full h-5/6;
+	}
+}

@@ -1,0 +1,10 @@
+.settings-modal {
+	@apply animate-opacity-slow absolute top-[4rem] right-[3rem] border-[1px] border-gray-400 p-2 rounded-md bg-white;
+
+	&__user {
+		@apply py-3 px-1 mb-3 border-b-2 border-b-gray-400;
+	}
+
+	&__item {
+	}
+}

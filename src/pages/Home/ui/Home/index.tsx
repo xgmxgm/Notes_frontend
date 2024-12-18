@@ -1,14 +1,10 @@
-import { useAuthActions } from '@/features/Authorize/hooks'
-import { useUserStore } from '@/app/store/storeUser'
 import { useIsAuth } from '@/app/store/storeIsAuth'
+import { NotesTable } from '@/widgets/NotesTable'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '@/shared/ui/Button'
 import styles from './Home.module.scss'
 import { useEffect } from 'react'
 
 export const HomePage = () => {
-	const { logout, isLoading } = useAuthActions()
-	const { user } = useUserStore()
 	const navigate = useNavigate()
 	const { isAuth } = useIsAuth()
 
@@ -20,12 +16,12 @@ export const HomePage = () => {
 
 	return (
 		<div className={styles['home']}>
-			<p>Home page</p>
-			<h2>{user.id}</h2>
-			<h2>{user.email}</h2>
-			<Button isLoading={isLoading} onClick={() => logout()}>
-				Logout
-			</Button>
+			<div className={styles['home__left-col']}>
+				<NotesTable />
+			</div>
+			<div className={styles['home__right-col']}>
+				<p>Home page</p>
+			</div>
 		</div>
 	)
 }

@@ -1,6 +1,6 @@
-import { Settings } from '@/shared/ui/Icons/Settings'
-import { SearchField } from '@/shared/ui/SearchField'
 import styles from './DesktopHeader.module.scss'
+import { SettingsButton } from '@/features/Settings'
+import { SearchField } from '@/shared/ui/SearchField'
 
 export const DesktopHeader = () => {
 	return (
@@ -10,9 +10,7 @@ export const DesktopHeader = () => {
 			</div>
 			<div className={styles['header__settings']}>
 				<SearchField />
-				<button onClick={() => alert('Settings')}>
-					<Settings />
-				</button>
+				<SettingsButton />
 			</div>
 		</header>
 	)

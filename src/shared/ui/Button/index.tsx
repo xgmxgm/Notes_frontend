@@ -3,7 +3,7 @@ import styles from './Button.module.scss'
 import { Spinner } from '../Spinner'
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	isLoading: boolean
+	isLoading?: boolean
 }
 
 export const Button = forwardRef<HTMLButtonElement, IProps>(
