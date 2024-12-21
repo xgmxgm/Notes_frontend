@@ -1,11 +1,11 @@
 .home {
-	@apply flex gap-6 p-6;
+	@apply h-full flex gap-6 p-6;
 
 	&__left-col {
-		@apply w-3/12;
+		@apply w-3/12 border-r-2 pr-6 border-gray-400;
 	}
 
 	&__right-col {
-		@apply bg-red-500 w-9/12;
+		@apply w-full;
 	}
 }

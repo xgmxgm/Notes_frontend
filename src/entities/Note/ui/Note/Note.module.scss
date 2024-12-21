@@ -1,0 +1,7 @@
+.note {
+	@apply w-full bg-red-400;
+
+	&__up {
+		@apply w-full bg-red-300;
+	}
+}

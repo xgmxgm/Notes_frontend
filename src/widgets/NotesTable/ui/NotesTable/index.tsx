@@ -1,27 +1,40 @@
-import { Button } from '@/shared/ui/Button'
-import styles from './NotesTable.module.scss'
-import { useNotes } from '@/app/store/storeNotes'
-import { useUserStore } from '@/app/store/storeUser'
-import { addNote, getAllNotes } from '@/entities/Note/api'
 import { useEffect } from 'react'
+import styles from './NotesTable.module.scss'
+import { getAllNotes } from '@/entities/Note/api'
+import { useNotes } from '@/app/store/storeNotes'
+import { type INote } from '@/entities/Note/types'
+import { useUserStore } from '@/app/store/storeUser'
+import { CreateNoteButton, NoteCard } from '@/entities/Note'
 
 export const NotesTable = () => {
 	const { user } = useUserStore()
 	const { setNotes, notes } = useNotes()
 
-	const handleSubmit = () => {
-		addNote(user.id!).then(notes => {
-			console.log('notes table:', notes)
-			setNotes(notes)
+	useEffect(() => {
+		getAllNotes(user.id!).then(notes => {
+			setNotes(notes as INote[])
 		})
-	}
-
-	useEffect(() => console.log(notes), [notes])
+	}, [])
 
 	return (
 		<div className={styles['notes-table']}>
-			<Button onClick={handleSubmit}>+ Create New Note</Button>
-			<Button onClick={() => getAllNotes(user.id!)}>Get All Notes</Button>
+			<div className={styles['notes-table__up']}>
+				<CreateNoteButton />
+			</div>
+			<div>
+				<ul>
+					{notes.length > 0 &&
+						notes.map((note, index) => (
+							<li key={index}>
+								<NoteCard
+									date={note.date}
+									title={note.title}
+									tags={note.tags}
+								/>
+							</li>
+						))}
+				</ul>
+			</div>
 		</div>
 	)
 }

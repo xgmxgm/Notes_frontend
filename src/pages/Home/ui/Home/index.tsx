@@ -2,6 +2,7 @@ import { useIsAuth } from '@/app/store/storeIsAuth'
 import { NotesTable } from '@/widgets/NotesTable'
 import { useNavigate } from 'react-router-dom'
 import styles from './Home.module.scss'
+import { Note } from '@/entities/Note'
 import { useEffect } from 'react'
 
 export const HomePage = () => {
@@ -20,7 +21,7 @@ export const HomePage = () => {
 				<NotesTable />
 			</div>
 			<div className={styles['home__right-col']}>
-				<p>Home page</p>
+				<Note />
 			</div>
 		</div>
 	)

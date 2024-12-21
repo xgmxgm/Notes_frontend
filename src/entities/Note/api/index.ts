@@ -11,13 +11,18 @@ import { INote } from '../types'
 const db = getFirestore()
 
 export const getAllNotes = async (userId: string) => {
+	let datas: INote[] = []
+
 	const querySnapshot = await getDocs(
 		collection(doc(db, 'users', userId!), 'notes')
 	)
 	querySnapshot.forEach(doc => {
 		const data = doc.data()
-		console.log(`${doc.id} =`, data)
+		datas.push(data as INote)
+		console.log(data)
 	})
+
+	return datas
 }
 
 export const addNote = async (userId: string) => {
