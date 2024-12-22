@@ -7,12 +7,18 @@ export const CreateNoteButton = () => {
 
 	const createNewNote = () => {
 		const date = new Date()
+		const options: Intl.DateTimeFormatOptions = {
+			day: '2-digit',
+			month: 'short',
+			year: 'numeric',
+		}
+		const formattedDate = date.toLocaleDateString('en-GB', options)
 
 		const note: INote = {
 			title: '',
 			tags: [],
 			data: '',
-			date: date.toString(),
+			date: formattedDate,
 		}
 
 		setNote(note)

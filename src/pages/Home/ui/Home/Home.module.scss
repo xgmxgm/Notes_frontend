@@ -1,8 +1,9 @@
 .home {
-	@apply h-full flex gap-6 p-6;
+	@apply h-full flex gap-6 pt-6;
 
 	&__left-col {
-		@apply w-3/12 border-r-2 pr-6 border-gray-400;
+		// @apply w-3/12 border-r-2 pr-6 border-gray-400;
+		@apply w-3/12 flex-grow border-r-2 px-6 border-gray-400;
 	}
 
 	&__right-col {

@@ -1,7 +1,27 @@
 .note {
-	@apply w-full bg-red-400;
+	@apply w-full;
 
 	&__up {
-		@apply w-full bg-red-300;
+		// @apply w-full border-b-2 border-gray-400 pb-6 mb-6;
+		@apply w-full mb-6;
+	}
+
+	&__tag-with-text {
+		@apply flex items-center gap-2;
+	}
+
+	&__tags {
+		@apply flex items-center gap-6 mb-3;
+	}
+
+	&__date {
+		@apply flex items-center gap-6;
+	}
+
+	&__center {
+	}
+
+	&__bottom {
+		@apply border-t-2 border-gray-400 pt-6 flex gap-10;
 	}
 }
