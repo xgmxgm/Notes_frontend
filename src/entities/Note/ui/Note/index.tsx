@@ -1,20 +1,38 @@
-import { type FC } from 'react'
+import { addNote } from '../../api'
 import styles from './Note.module.scss'
 import { Button } from '@/shared/ui/Button'
 import { Tag } from '@/shared/ui/Icons/Tag'
 import { useNote } from '../../store/storeNote'
 import { Textarea } from '@/shared/ui/Textarea'
 import { Clock } from '@/shared/ui/Icons/Clock'
+import { useEffect, useState, type FC } from 'react'
+import { useUserStore } from '@/app/store/storeUser'
 
 export const Note: FC = () => {
-	const { note } = useNote()
+	const { note, setNote } = useNote()
+	const [title, setTitle] = useState<string>('')
+	const [data, setData] = useState<string>('')
+	const { user } = useUserStore()
 
-	console.log(note)
+	const saveSubmit = () => {
+		setNote({
+			title,
+			data,
+			date: note.date,
+			tags: note.tags,
+		})
+
+		console.log(note)
+
+		addNote(user.id!, note)
+	}
 
 	return (
 		<div className={styles['note']}>
 			<div className={styles['note__up']}>
 				<Textarea
+					state={title}
+					setState={setTitle}
 					placeholder='Title'
 					className='font-bold text-3xl h-11'
 				></Textarea>
@@ -22,7 +40,6 @@ export const Note: FC = () => {
 					<div className={styles['note__tag-with-text']}>
 						<Tag width={30} height={30} />
 						<p>Tags</p>
-						<Button>+ Add</Button>
 					</div>
 					{note.tags.length > 0 ? (
 						note.tags.map((tag, index) => <p key={index}>{tag}</p>)
@@ -40,12 +57,14 @@ export const Note: FC = () => {
 			</div>
 			<div className={styles['note__center']}>
 				<Textarea
+					state={data}
+					setState={setData}
 					placeholder='Start typing'
 					className='text-lg font-normal h-96'
 				></Textarea>
 			</div>
 			<div className={styles['note__bottom']}>
-				<Button>Save Note</Button>
+				<Button onClick={() => saveSubmit()}>Save Note</Button>
 				<Button>Cancel</Button>
 			</div>
 		</div>

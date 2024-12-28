@@ -25,17 +25,15 @@ export const getAllNotes = async (userId: string) => {
 	return datas
 }
 
-export const addNote = async (userId: string) => {
-	const date = new Date()
-
+export const addNote = async (userId: string, noteData: INote) => {
 	const docRef = collection(doc(db, 'users', userId), 'notes')
 
-	const noteData: INote = {
-		title: '',
-		data: '',
-		tags: [],
-		date: date.toString(),
-	}
+	// const noteData: INote = {
+	// 	title: '',
+	// 	data: '',
+	// 	tags: [],
+	// 	date: date.toString(),
+	// }
 
 	const noteRef = await addDoc(docRef, noteData)
 	const noteSnap = await getDoc(noteRef)
