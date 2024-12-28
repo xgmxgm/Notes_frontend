@@ -1,13 +1,13 @@
-import { useIsAuth } from '@/app/store/storeIsAuth'
-import { NotesTable } from '@/widgets/NotesTable'
-import { useNavigate } from 'react-router-dom'
-import styles from './Home.module.scss'
-import { Note } from '@/entities/Note'
 import { useEffect } from 'react'
+import { Note } from '@/entities/Note'
+import styles from './Home.module.scss'
+import { useNavigate } from 'react-router-dom'
+import { NotesTable } from '@/widgets/NotesTable'
+import { useAppSelector } from '@/app/store/store'
 
 export const HomePage = () => {
 	const navigate = useNavigate()
-	const { isAuth } = useIsAuth()
+	const isAuth = useAppSelector(state => state.isAuth)
 
 	useEffect(() => {
 		if (!isAuth) navigate('/authorize')

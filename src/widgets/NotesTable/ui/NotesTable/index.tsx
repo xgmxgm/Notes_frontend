@@ -1,20 +1,9 @@
-import { useEffect } from 'react'
 import styles from './NotesTable.module.scss'
-import { getAllNotes } from '@/entities/Note/api'
-import { useNotes } from '@/app/store/storeNotes'
-import { type INote } from '@/entities/Note/types'
-import { useUserStore } from '@/app/store/storeUser'
+import { useAppSelector } from '@/app/store/store'
 import { CreateNoteButton, NoteCard } from '@/entities/Note'
 
 export const NotesTable = () => {
-	const { user } = useUserStore()
-	const { setNotes, notes } = useNotes()
-
-	useEffect(() => {
-		getAllNotes(user.id!).then(notes => {
-			setNotes(notes as INote[])
-		})
-	}, [])
+	const user = useAppSelector(state => state.user)
 
 	return (
 		<div className={styles['notes-table']}>
@@ -23,13 +12,16 @@ export const NotesTable = () => {
 			</div>
 			<div>
 				<ul>
-					{notes.length > 0 &&
-						notes.map((note, index) => (
+					{[].length > 0 &&
+						[].map((note, index) => (
 							<li key={index}>
 								<NoteCard
-									date={note.date}
-									title={note.title}
-									tags={note.tags}
+									// date={note.date}
+									// title={note.title}
+									// tags={note.tags}
+									date=''
+									title=''
+									tags={[]}
 								/>
 							</li>
 						))}

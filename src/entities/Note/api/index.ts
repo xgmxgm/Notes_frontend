@@ -19,7 +19,6 @@ export const getAllNotes = async (userId: string) => {
 	querySnapshot.forEach(doc => {
 		const data = doc.data()
 		datas.push(data as INote)
-		console.log(data)
 	})
 
 	return datas
@@ -28,14 +27,8 @@ export const getAllNotes = async (userId: string) => {
 export const addNote = async (userId: string, noteData: INote) => {
 	const docRef = collection(doc(db, 'users', userId), 'notes')
 
-	// const noteData: INote = {
-	// 	title: '',
-	// 	data: '',
-	// 	tags: [],
-	// 	date: date.toString(),
-	// }
-
 	const noteRef = await addDoc(docRef, noteData)
 	const noteSnap = await getDoc(noteRef)
+
 	return noteSnap.data()
 }

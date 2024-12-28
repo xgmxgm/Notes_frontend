@@ -1,11 +1,11 @@
 import { Button } from '@/shared/ui/Button'
 import styles from './SettingsSlect.module.scss'
-import { useUserStore } from '@/app/store/storeUser'
+import { useAppSelector } from '@/app/store/store'
 import { useAuthActions } from '@/features/Authorize/hooks'
 
 export const SettingsModal = () => {
 	const { isLoading, logout } = useAuthActions()
-	const { user } = useUserStore()
+	const user = useAppSelector(state => state.user)
 
 	return (
 		<div className={styles['settings-modal']}>

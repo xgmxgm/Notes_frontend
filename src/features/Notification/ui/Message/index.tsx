@@ -1,9 +1,9 @@
-import { type PropsWithChildren, type FC, useEffect } from 'react'
-import styles from './Message.module.scss'
-import { motion } from 'framer-motion'
 import classNames from 'classnames'
+import { motion } from 'framer-motion'
+import styles from './Message.module.scss'
 import { Check } from '@/shared/ui/Icons/Check'
 import { Error } from '@/shared/ui/Icons/Error'
+import { type PropsWithChildren, type FC, useEffect } from 'react'
 
 interface IProps {
 	success?: boolean

@@ -1,7 +1,7 @@
-import { Settings } from '@/shared/ui/Icons/Settings'
-import styles from './SettingsButton.module.scss'
 import { useState } from 'react'
 import { SettingsModal } from '../SettingsModal'
+import styles from './SettingsButton.module.scss'
+import { Settings } from '@/shared/ui/Icons/Settings'
 
 export const SettingsButton = () => {
 	const [selectIsShow, setSelectIsShow] = useState<boolean>(false)

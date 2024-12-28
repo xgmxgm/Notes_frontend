@@ -1,21 +1,22 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useIsAuth } from '@/app/store/storeIsAuth'
-import { useUserStore } from '@/app/store/storeUser'
+import { setIsAuth } from '@/app/store/slices'
+import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { useNotificationContext } from '@/features/Notification/context'
 import {
 	getAuth,
-	signInWithEmailAndPassword,
-	createUserWithEmailAndPassword,
 	signOut,
 	sendPasswordResetEmail,
+	signInWithEmailAndPassword,
+	createUserWithEmailAndPassword,
 } from 'firebase/auth'
+import { clearUser, setUser } from '@/entities/User/slice'
 
 export const useAuthActions = () => {
 	const auth = getAuth()
 	const navigate = useNavigate()
-	const { setAuth } = useIsAuth()
-	const { setUser, removeUser } = useUserStore()
+	const dispatch = useAppDispatch()
+	const userState = useAppSelector(state => state.user)
 	const { setError, setSuccess } = useNotificationContext()
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -24,11 +25,14 @@ export const useAuthActions = () => {
 
 		await signInWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
-				setUser({
-					email: user.email,
-					id: user.uid,
-				})
-				setAuth(true)
+				dispatch(
+					setUser({
+						email: user.email,
+						id: user.uid,
+					})
+				)
+				console.log('loginWithEmailAndPassword/userState: ', userState)
+				dispatch(setIsAuth(true))
 				setSuccess('You have successfully logged in')
 				navigate('/')
 			})
@@ -80,9 +84,9 @@ export const useAuthActions = () => {
 	}
 
 	const logout = async () => {
-		removeUser()
+		dispatch(clearUser())
 		signOut(auth)
-		setAuth(false)
+		dispatch(setIsAuth(false))
 	}
 
 	return {
