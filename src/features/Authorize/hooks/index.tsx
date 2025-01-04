@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { setIsAuth } from '@/app/store/slices'
+import { clearUser, setUser } from '@/entities/User/slice'
 import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { useNotificationContext } from '@/features/Notification/context'
 import {
@@ -10,7 +11,6 @@ import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 } from 'firebase/auth'
-import { clearUser, setUser } from '@/entities/User/slice'
 
 export const useAuthActions = () => {
 	const auth = getAuth()
