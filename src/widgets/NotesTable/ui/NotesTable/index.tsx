@@ -21,7 +21,7 @@ export const NotesTable = () => {
 			<div className={styles['notes-table__up']}>
 				<CreateNoteButton />
 			</div>
-			<div>
+			<div className={styles['notes-table__bottom']}>
 				<ul>
 					{notes.length > 0 &&
 						notes.map((note, index) => (

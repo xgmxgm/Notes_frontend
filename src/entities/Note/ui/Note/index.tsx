@@ -1,11 +1,11 @@
 import { addNote } from '../../api'
 import styles from './Note.module.scss'
+import { useState, type FC } from 'react'
 import { Button } from '@/shared/ui/Button'
 import { Tag } from '@/shared/ui/Icons/Tag'
 import { useNote } from '../../store/storeNote'
 import { Textarea } from '@/shared/ui/Textarea'
 import { Clock } from '@/shared/ui/Icons/Clock'
-import { useEffect, useState, type FC } from 'react'
 import { useUserStore } from '@/app/store/storeUser'
 
 export const Note: FC = () => {
@@ -22,9 +22,9 @@ export const Note: FC = () => {
 			tags: note.tags,
 		})
 
-		console.log(note)
+		console.log(useNote.getState().note)
 
-		addNote(user.id!, note)
+		addNote(user.id!, useNote.getState().note)
 	}
 
 	return (

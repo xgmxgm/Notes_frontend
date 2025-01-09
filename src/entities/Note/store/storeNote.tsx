@@ -14,7 +14,7 @@ export const useNote = create<ICurrentNotes>()(
 	persist(
 		set => ({
 			note: { title: '', data: '', tags: [], date: date.toString() },
-			setNote: note => set(() => ({ note: note })),
+			setNote: note => set(() => ({ note: { ...note, tags: [...note.tags] } })),
 			clearNote: () => set(() => ({ note: {} as INote })),
 		}),
 		{ name: 'currentNote-storage' }
