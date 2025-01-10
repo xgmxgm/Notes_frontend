@@ -1,13 +1,20 @@
 import { addNote } from '../../api'
 import { setNote } from '../../slice'
 import styles from './Note.module.scss'
+<<<<<<< HEAD
 import { type INote } from '../../types'
+=======
+>>>>>>> e3c6260c50031807b8abe261bd4ab4c1e1880b3f
 import { useState, type FC } from 'react'
 import { Button } from '@/shared/ui/Button'
 import { Tag } from '@/shared/ui/Icons/Tag'
 import { Textarea } from '@/shared/ui/Textarea'
 import { Clock } from '@/shared/ui/Icons/Clock'
+<<<<<<< HEAD
 import { useAppDispatch, useAppSelector } from '@/app/store/store'
+=======
+import { useUserStore } from '@/app/store/storeUser'
+>>>>>>> e3c6260c50031807b8abe261bd4ab4c1e1880b3f
 
 export const Note: FC = () => {
 	const [title, setTitle] = useState<string>('')
@@ -26,9 +33,13 @@ export const Note: FC = () => {
 
 		dispatch(setNote(updatedNote))
 
-		console.log(note)
+		console.log(useNote.getState().note)
 
+<<<<<<< HEAD
 		addNote(user.id, note)
+=======
+		addNote(user.id!, useNote.getState().note)
+>>>>>>> e3c6260c50031807b8abe261bd4ab4c1e1880b3f
 	}
 
 	if (note) {

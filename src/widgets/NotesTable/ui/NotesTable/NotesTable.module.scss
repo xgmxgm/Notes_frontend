@@ -1,7 +1,11 @@
 .notes-table {
-	@apply flex flex-col items-center;
+	@apply w-full flex flex-col items-center;
 
 	&__up {
 		@apply w-full mb-6;
+	}
+
+	&__bottom {
+		@apply w-full;
 	}
 }
